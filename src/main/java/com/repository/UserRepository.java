@@ -1,6 +1,6 @@
-package repository;
+package com.repository;
 
-import model.User;
+import com.model.User;
 
 /**
  * Class {@link UserRepository}

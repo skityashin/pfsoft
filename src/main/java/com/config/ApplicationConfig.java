@@ -1,4 +1,4 @@
-package config;
+package com.config;
 
 import org.apache.catalina.Context;
 import org.apache.jasper.servlet.JasperInitializer;
@@ -74,9 +74,9 @@ public class ApplicationConfig {
 //        dataSource.setUrl(url);
 //        dataSource.setUsername(username);
 //        dataSource.setPassword(password);
-        dataSource.setUrl("jdbc:mysql://localhost:3306/internetshop");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/user");
         dataSource.setUsername("root");
-        dataSource.setPassword("skityashin");
+        dataSource.setPassword("");
         return dataSource;
     }
 }

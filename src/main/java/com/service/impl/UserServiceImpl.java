@@ -1,11 +1,13 @@
-package service.impl;
+package com.service.impl;
 
 
-import model.User;
+
+import com.model.User;
+import com.repository.UserRepository;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
-import service.UserService;
+
 
 /**
  * Class {@link UserServiceImpl}

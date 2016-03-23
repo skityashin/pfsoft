@@ -1,11 +1,11 @@
-package controller;
+package com.controller;
 
-import dto.UserDto;
-import model.User;
+
+
+import com.dto.UserDto;
+import com.model.User;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginUser(@ModelAttribute UserDto userDto) {
 
         User user = userService.findByLogin(userDto.getLogin());

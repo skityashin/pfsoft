@@ -1,9 +1,9 @@
-package repository.impl;
+package com.repository.impl;
 
-import model.User;
+import com.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import repository.UserRepository;
+import com.repository.UserRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 

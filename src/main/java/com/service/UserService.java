@@ -1,6 +1,6 @@
-package service;
+package com.service;
 
-import model.User;
+import com.model.User;
 
 /**
  * Class {@link UserService}
