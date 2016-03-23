@@ -3,6 +3,6 @@
     <form action="/user/login" method="POST" id="login-user">
         Login: <input type="text" value="" name="login"><br>
         Password: <input type="password" value="" name="pass"><br>
-        <input type="submit">
+        <input type="submit" value="Send">
     </form>
 </div>
