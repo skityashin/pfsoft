@@ -76,7 +76,7 @@ public class ApplicationConfig {
 //        dataSource.setPassword(password);
         dataSource.setUrl("jdbc:mysql://localhost:3306/user");
         dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setPassword("skityashin");
         return dataSource;
     }
 }
