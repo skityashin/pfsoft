@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 
 /**
@@ -39,7 +42,6 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String showForm() {
-
         return "login";
     }
 
@@ -57,17 +59,31 @@ public class UserController {
     }
 
     /**
-     *
+     * @param file
      * @param model
      * @return result
+     * @throws IOException
      */
     @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public String workFile(@RequestParam("file") MultipartFile  file, Model model) throws IOException {
+    public String workFile(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         List<String> str = working(convert(file));
+//        for (String i : str) {
+//            String temp = i;
+//            String   tmpString = temp.replace(' ', "&nbsp;");
+//            str.
+//
+//        }
         model.addAttribute("str", str);
-//        model.addAttribute("description",  working(convert(file)));
-
         return "result";
+    }
+
+    /**
+     * @return zip
+     */
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public String workFileToZip() {
+        writeToZip();
+        return "zip";
     }
 
     public File convert(MultipartFile file) throws IOException {
@@ -78,7 +94,6 @@ public class UserController {
         fos.close();
         return convFile;
     }
-
 
     public List<String> working(File file) throws FileNotFoundException {
         String myArray[] = read(file).split("\n");
@@ -113,18 +128,12 @@ public class UserController {
                 }
             }
             if (queue.isEmpty()) {
-//                System.out.println("Syntax OK");
             } else {
-//                System.out.println(st);
                 write(st);
                 str.add(st);
                 st1 = new String(array2);
                 write(st1);
                 str.add(st1);
-//                for (int i = 0; i < array2.length; i++) {
-//                    System.out.print(array2[i]);
-//                }
-//                System.out.println();
             }
         }
         return str;
@@ -132,7 +141,6 @@ public class UserController {
 
     public static String read(File file) {
         StringBuilder sb = new StringBuilder();
-//        File file = new File("in.txt");
         try {
             //Объект для чтения файла в буфер
             BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()));
@@ -177,4 +185,23 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    public static void writeToZip() {
+        String filename = "out.txt";
+        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("out.zip"));
+             FileInputStream fis = new FileInputStream(filename)) {
+            ZipEntry entry = new ZipEntry(filename);
+            zout.putNextEntry(entry);
+            // считываем содержимое файла в массив byte
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            // добавляем содержимое к архиву
+            zout.write(buffer);
+            // закрываем текущую запись для новой записи
+            zout.closeEntry();
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
 }
