@@ -38,6 +38,7 @@ public class UserController {
     private UserService userService;
 
     /**
+     * login User
      * @return login
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -46,6 +47,7 @@ public class UserController {
     }
 
     /**
+     * login User
      * @param userDto
      * @return file
      */
@@ -59,6 +61,7 @@ public class UserController {
     }
 
     /**
+     * withdrawal of lines per HTML-page
      * @param file
      * @param model
      * @return result
@@ -67,17 +70,12 @@ public class UserController {
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     public String workFile(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         List<String> str = working(convert(file));
-//        for (String i : str) {
-//            String temp = i;
-//            String   tmpString = temp.replace(' ', "&nbsp;");
-//            str.
-//
-//        }
         model.addAttribute("str", str);
         return "result";
     }
 
     /**
+     * writes a file "out.txt" to the ZIP-archive "out.zip"
      * @return zip
      */
     @RequestMapping(value = "/result", method = RequestMethod.GET)
@@ -86,6 +84,12 @@ public class UserController {
         return "zip";
     }
 
+    /**
+     * Converting MultipartFile to java.io.File
+     * @param file
+     * @return convFile
+     * @throws IOException
+     */
     public File convert(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
         convFile.createNewFile();
@@ -95,10 +99,16 @@ public class UserController {
         return convFile;
     }
 
+    /**
+     * method withdrawal of lines per HTML-page
+     * @param file
+     * @return str
+     * @throws FileNotFoundException
+     */
     public List<String> working(File file) throws FileNotFoundException {
         String myArray[] = read(file).split("\n");
         String st = "";
-        List<String> str = new ArrayList<String>();
+        List<String> str = new ArrayList<>();
         for (int k = 0; k < myArray.length; k++) {
             st = myArray[k];
             String st1 = "";
@@ -139,6 +149,11 @@ public class UserController {
         return str;
     }
 
+    /**
+     * method of reading lines from a file "in.txt"
+     * @param file
+     * @return
+     */
     public static String read(File file) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -162,6 +177,10 @@ public class UserController {
         return sb.toString();
     }
 
+    /**
+     * method writes a string to a file "out.txt"
+     * @param text
+     */
     public static void write(String text) {
         //Определяем файл
         File file = new File("out.txt");
@@ -186,6 +205,9 @@ public class UserController {
         }
     }
 
+    /**
+     * method writes a file "out.txt" to the ZIP-archive "out.zip"
+     */
     public static void writeToZip() {
         String filename = "out.txt";
         try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("out.zip"));
