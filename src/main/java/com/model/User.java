@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @since 23.03.16
  */
 
-
 // the creation of the database columns
 
 @Entity
