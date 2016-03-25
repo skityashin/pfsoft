@@ -40,18 +40,25 @@ public class ApplicationConfig {
 //    @Value("${MYSQL_PASSWORD}")
     private String password;
 
-
+    /**
+     * Introduce a Property sources placeholder configurer
+     * @return  instance
+     */
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
+
 
     @Bean(destroyMethod = "shutdown")
     public ScheduledExecutorService taskExecutor() {
         return Executors.newScheduledThreadPool(TASKS_POOL_SIZE);
     }
 
-
+    /**
+     * Introduce a Tomcat embedded servlet container factory
+     * @return factory
+     */
     @Bean
     public TomcatEmbeddedServletContainerFactory factory() {
 
@@ -66,7 +73,10 @@ public class ApplicationConfig {
         return tomcatEmbeddedServletContainerFactory;
     }
 
-
+    /**
+     * Introduces data source and variables for the database connection
+     * @return data source
+     */
     @Bean
     public DataSource makeDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

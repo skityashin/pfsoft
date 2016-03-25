@@ -17,6 +17,11 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 public class ConfigurationForTitles {
 
+    /**
+     * Initialise Tiles on application startup and identify the location of the tiles configuration file, tiles.xml.
+     *
+     * @return tiles configurer
+     */
     @Bean
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer configurer = new TilesConfigurer();
@@ -27,6 +32,11 @@ public class ConfigurationForTitles {
         return configurer;
     }
 
+    /**
+     * Introduce a Tiles view resolver, this is a convenience implementation that extends URLBasedViewResolver.
+     *
+     * @return tiles view resolver
+     */
     @Bean
     public TilesViewResolver tilesViewResolver() {
         final TilesViewResolver resolver = new TilesViewResolver();
