@@ -1,6 +1,5 @@
 package com.model;
 
-
 import javax.persistence.*;
 
 /**
@@ -53,10 +52,5 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
-
-
-
-
-
 
 }

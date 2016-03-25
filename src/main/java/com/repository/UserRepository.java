@@ -13,5 +13,4 @@ import com.model.User;
 public interface UserRepository {
 
     User findByLogin (String login);
-
 }

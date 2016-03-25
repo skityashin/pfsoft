@@ -9,6 +9,7 @@ import com.model.User;
  * @version 1.0
  * @since 23.03.16
  */
+
 public interface UserService {
 
     User findByLogin (String login);
