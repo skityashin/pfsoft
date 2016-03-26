@@ -6,18 +6,12 @@ import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -34,6 +28,7 @@ import java.util.zip.ZipOutputStream;
 @RequestMapping("/user")
 public class UserController {
 
+//    private static final String PASSWORD_PATTERN = "(^(?=.*\\d)(?=.*[a-zA-Z]).{6,15}$)";
     @Autowired
     private UserService userService;
 
@@ -57,9 +52,14 @@ public class UserController {
         if (user == null) {
             return "redirect:/user/login";
         }
+//        Pattern p = Pattern.compile(PASSWORD_PATTERN);
+//        Matcher m = p.matcher(userDto.getPassword());
+//        if (!m.matches()){
+//            return "view.login_form";
+//        }
         return "file";
     }
-
+    
     /**
      * withdrawal of lines per HTML-page
      * @param file
